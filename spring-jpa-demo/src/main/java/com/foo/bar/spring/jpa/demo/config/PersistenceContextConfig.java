@@ -6,7 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
-import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.ejb.HibernatePersistence;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -59,6 +59,9 @@ public class PersistenceContextConfig {
 		dataSource.setUrl(this.dbUrl);
 		dataSource.setUsername(this.dbUsername);
 		dataSource.setPassword(this.dbPassword);
+		
+		dataSource.setValidationQuery("select 1");
+		dataSource.setValidationQueryTimeout(20000);
 
 		return dataSource;
 	}
